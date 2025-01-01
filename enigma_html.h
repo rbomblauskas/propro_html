@@ -1,5 +1,5 @@
-#ifndef HTML_TABLE_H
-#define HTML_TABLE_H
+#ifndef ENIGMA_HTML_H
+#define ENIGMA_HTML_H
 
 #include <stdio.h>
 #include <stdbool.h>
