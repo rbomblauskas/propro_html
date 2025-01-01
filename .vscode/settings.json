@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "enigma_html.h": "c",
+        "cstdlib": "c"
+    }
+}

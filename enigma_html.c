@@ -4,6 +4,50 @@
 
 #define MAX_NUMBER_LENGTH 32
 
+void html_document_begin(FILE *fp, const char *title, const char *css_file)
+{
+    if (!fp)
+        return;
+    fprintf(fp, "<!DOCTYPE html>\n<html lang=\"en\"><head>\n<meta charset=\"UTF-8\">\n");
+    if (title)
+    {
+        fprintf(fp, "<title>%s</title>\n", title);
+    }
+    if (css_file)
+    {
+        fprintf(fp, "<link rel=\"stylesheet\" href=\"%s\">\n", css_file);
+    }
+    fprintf(fp, "</head>\n<body>\n");
+}
+
+void html_document_end(FILE *fp)
+{
+    if (!fp)
+        return;
+    fprintf(fp, "</body>\n</html>\n");
+}
+
+void div_begin(FILE *fp, const char *css_class, const char *id)
+{
+    if (!fp)
+        return;
+    fprintf(fp, "<div");
+    if (css_class)
+    {
+        fprintf(fp, " class=\"%s\"", css_class);
+    }
+    if (id)
+    {
+        fprintf(fp, " id=\"%s\"", id);
+    }
+    fprintf(fp, ">\n");
+}
+
+void div_end(FILE *fp)
+{
+    fprintf(fp, "</div>\n");
+}
+
 static const char *get_alignment_class(ColumnAlignment align)
 {
     switch (align)
