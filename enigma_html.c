@@ -68,13 +68,6 @@ void table_begin(FILE *fp, const TableConfig *config)
     if (!fp || !config)
         return;
 
-    fprintf(fp, "<div");
-    if (config->responsive)
-    {
-        fprintf(fp, " class=\"table-responsive\"");
-    }
-    fprintf(fp, ">\n");
-
     fprintf(fp, "<table");
     if (config->table_id)
     {
@@ -194,7 +187,7 @@ void table_end(FILE *fp)
 {
     if (!fp)
         return;
-    fprintf(fp, "  </tbody>\n</table>\n</div>\n");
+    fprintf(fp, "  </tbody>\n</table>\n");
 }
 
 void list_begin(FILE *fp, const char *css_class)

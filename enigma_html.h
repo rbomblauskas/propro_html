@@ -26,7 +26,6 @@ typedef struct
     bool striped;
     bool hoverable;
     bool bordered;
-    bool responsive;
 } TableConfig;
 
 // Write the opening of the HTML document and head

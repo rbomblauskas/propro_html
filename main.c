@@ -9,8 +9,8 @@ int main()
         return 1;
     }
 
-    html_document_begin(fp, "Test HTML Page", "style.css");
-    h1_gen(fp, "Welcome to the Test Page", "main-header");
+    html_document_begin(fp, "Minesweeper - Leaderboard", "style.css");
+
     div_begin(fp, "container", "main-content");
 
     TableConfig table_config = {
@@ -19,8 +19,7 @@ int main()
         .caption = "Sample Table",
         .striped = true,
         .hoverable = true,
-        .bordered = true,
-        .responsive = true};
+        .bordered = true};
 
     TableColumn columns[] = {
         {"Header 1", "header-class-1", ALIGN_LEFT},
