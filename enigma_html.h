@@ -8,7 +8,8 @@ typedef enum
 {
     ALIGN_LEFT,
     ALIGN_CENTER,
-    ALIGN_RIGHT
+    ALIGN_RIGHT,
+    ALIGN_NONE
 } ColumnAlignment;
 
 typedef struct
@@ -28,11 +29,31 @@ typedef struct
     bool bordered;
 } TableConfig;
 
+typedef struct
+{
+    const char *link;
+    const char *label;
+    const char *css_class;
+} NavbarItem;
+
+typedef struct
+{
+    const char *navbar_id;
+    const char *css_class;
+    const char *logo_text;
+    const char *logo_css_class;
+    NavbarItem *items;
+    int num_items;
+} NavbarConfig;
+
 // Write the opening of the HTML document and head
 void html_document_begin(FILE *fp, const char *title, const char *css_file);
 
 // Write the closing of the HTML document
 void html_document_end(FILE *fp);
+
+// Generates the navigation bar
+void navbar_generate(FILE *fp, const NavbarConfig *config);
 
 // Begin a new div with optional CSS class
 void div_begin(FILE *fp, const char *css_class, const char *id);
@@ -64,9 +85,6 @@ void table_row_end(FILE *fp);
 // End the table
 void table_end(FILE *fp);
 
-// Escape HTML special characters in a string
-char *html_escape(const char *input);
-
 // Initialize a new list
 void list_begin(FILE *fp, const char *css_class);
 
@@ -75,5 +93,8 @@ void list_end(FILE *fp);
 
 // Write a list item with text content
 void list_item(FILE *fp, const char *content, const char *css_class);
+
+// Escape HTML special characters in a string. It is the programmer's responsibility to free the return value.
+char *html_escape(const char *input);
 
 #endif

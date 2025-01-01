@@ -27,6 +27,60 @@ void html_document_end(FILE *fp)
     fprintf(fp, "</body>\n</html>\n");
 }
 
+void navbar_generate(FILE *fp, const NavbarConfig *config)
+{
+    if (!fp || !config)
+        return;
+
+    fprintf(fp, "<nav id=\"");
+    if (config->navbar_id)
+    {
+        fprintf(fp, "%s", config->navbar_id);
+    }
+    fprintf(fp, "\" class=\"");
+    if (config->css_class)
+    {
+        fprintf(fp, "%s", config->css_class);
+    }
+    fprintf(fp, "\">\n");
+
+    if (config->logo_text)
+    {
+        fprintf(fp, "<div class=\"");
+        if (config->logo_css_class)
+        {
+            fprintf(fp, "%s", config->logo_css_class);
+        }
+        else
+        {
+            fprintf(fp, "navbar-logo");
+        }
+        fprintf(fp, "\">%s</div>\n", config->logo_text);
+    }
+
+    fprintf(fp, "<ul class=\"navbar-links\">\n");
+    for (int i = 0; i < config->num_items; ++i)
+    {
+        NavbarItem *item = &config->items[i];
+        fprintf(fp, "<li><a href=\"");
+        if (item->link)
+        {
+            fprintf(fp, "%s", item->link);
+        }
+        else
+        {
+            fprintf(fp, "#");
+        }
+        if (item->css_class)
+        {
+            fprintf(fp, " class=\"%s\"", item->css_class);
+        }
+        fprintf(fp, "\">%s</a></li>\n", item->label ? item->label : "");
+    }
+    fprintf(fp, "</ul>\n");
+    fprintf(fp, "</nav>\n");
+}
+
 void div_begin(FILE *fp, const char *css_class, const char *id)
 {
     if (!fp)
@@ -45,7 +99,26 @@ void div_begin(FILE *fp, const char *css_class, const char *id)
 
 void div_end(FILE *fp)
 {
+    if (!fp)
+        return;
     fprintf(fp, "</div>\n");
+}
+
+void h1_gen(FILE *fp, const char *title, const char *css_class)
+{
+    if (!fp)
+        return;
+    fprintf(fp, "<h1");
+    if (css_class)
+    {
+        fprintf(fp, " class=\"%s\"", css_class);
+    }
+    fprintf(fp, ">");
+    if (title)
+    {
+        fprintf(fp, "%s", title);
+    }
+    fprintf(fp, "</h1>\n");
 }
 
 static const char *get_alignment_class(ColumnAlignment align)
@@ -95,7 +168,7 @@ void table_begin(FILE *fp, const TableConfig *config)
 
     if (config->caption)
     {
-        fprintf(fp, "  <caption>%s</caption>\n", config->caption);
+        fprintf(fp, "<caption>%s</caption>\n", config->caption);
     }
 }
 
@@ -104,11 +177,11 @@ void table_header(FILE *fp, const TableColumn columns[], int num_columns)
     if (!fp || !columns || num_columns <= 0)
         return;
 
-    fprintf(fp, "  <thead>\n    <tr>\n");
+    fprintf(fp, "<thead>\n<tr>\n");
 
     for (int i = 0; i < num_columns; i++)
     {
-        fprintf(fp, "      <th");
+        fprintf(fp, "<th");
 
         if (columns[i].css_class || columns[i].align != ALIGN_LEFT)
         {
@@ -123,14 +196,14 @@ void table_header(FILE *fp, const TableColumn columns[], int num_columns)
         fprintf(fp, ">%s</th>\n", columns[i].header);
     }
 
-    fprintf(fp, "    </tr>\n  </thead>\n  <tbody>\n");
+    fprintf(fp, "</tr>\n</thead>\n<tbody>\n");
 }
 
 void table_row_begin(FILE *fp)
 {
     if (!fp)
         return;
-    fprintf(fp, "    <tr>\n");
+    fprintf(fp, "<tr>\n");
 }
 
 void table_cell(FILE *fp, const char *content, const char *css_class, ColumnAlignment align)
@@ -138,7 +211,7 @@ void table_cell(FILE *fp, const char *content, const char *css_class, ColumnAlig
     if (!fp)
         return;
 
-    fprintf(fp, "      <td");
+    fprintf(fp, "<td");
 
     if (css_class || align != ALIGN_LEFT)
     {
@@ -180,14 +253,14 @@ void table_row_end(FILE *fp)
 {
     if (!fp)
         return;
-    fprintf(fp, "    </tr>\n");
+    fprintf(fp, "</tr>\n");
 }
 
 void table_end(FILE *fp)
 {
     if (!fp)
         return;
-    fprintf(fp, "  </tbody>\n</table>\n");
+    fprintf(fp, "</tbody>\n</table>\n");
 }
 
 void list_begin(FILE *fp, const char *css_class)
@@ -206,7 +279,7 @@ void list_item(FILE *fp, const char *content, const char *css_class)
 {
     if (!fp)
         return;
-    fprintf(fp, "  <li");
+    fprintf(fp, "<li");
     if (css_class)
     {
         fprintf(fp, " class=\"%s\"", css_class);

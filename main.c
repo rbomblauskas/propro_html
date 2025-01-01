@@ -2,7 +2,7 @@
 
 int main()
 {
-    //HTML TESTAS
+    // HTML TESTAS
     FILE *fp = fopen("test_output.html", "w");
     if (!fp)
     {
@@ -11,37 +11,46 @@ int main()
 
     html_document_begin(fp, "Minesweeper - Leaderboard", "style.css");
 
-    div_begin(fp, "container", "main-content");
+    NavbarItem items[] = {
+        {"/", "Play", NULL},
+        {"/leaderboard.html", "Leaderboard", NULL},
+    };
+
+    NavbarConfig navbar = {
+        .navbar_id = "main-navbar",
+        .css_class = "navbar",
+        .logo_text = "Minesweeper",
+        .logo_css_class = "navbar-logo",
+        .items = items,
+        .num_items = 3};
+
+    navbar_generate(fp, &navbar);
+
+    div_begin(fp, "leaderboard-container", NULL);
+    h1_gen(fp, "Top Players", "leaderboard-title");
+    div_begin(fp, "leaderboard-table-container", NULL);
 
     TableConfig table_config = {
-        .table_id = "sample-table",
-        .css_class = "table-class",
-        .caption = "Sample Table",
+        .table_id = NULL,
+        .css_class = "leaderboard-table",
+        .caption = NULL,
         .striped = true,
         .hoverable = true,
         .bordered = true};
 
     TableColumn columns[] = {
-        {"Header 1", "header-class-1", ALIGN_LEFT},
-        {"Header 2", "header-class-2", ALIGN_CENTER},
-        {"Header 3", "header-class-3", ALIGN_RIGHT}};
+        {"Rank", NULL, ALIGN_NONE},
+        {"IP Address", NULL, ALIGN_NONE},
+        {"Best Time", NULL, ALIGN_NONE},
+        {"Games Won", NULL, ALIGN_NONE},
+        {"Win Rate", NULL, ALIGN_NONE},
+        {"Last Played", NULL, ALIGN_NONE}};
 
     table_begin(fp, &table_config);
-    table_header(fp, columns, 3);
-
-    table_row_begin(fp);
-    table_cell(fp, "Row 1, Column 1", "cell-class-1", ALIGN_LEFT);
-    table_cell(fp, "Row 1, Column 2", "cell-class-2", ALIGN_CENTER);
-    table_cell(fp, "Row 1, Column 3", "cell-class-3", ALIGN_RIGHT);
-    table_row_end(fp);
-
-    table_row_begin(fp);
-    table_cell(fp, "Row 2, Column 1", "cell-class-1", ALIGN_LEFT);
-    table_cell(fp, "Row 2, Column 2", "cell-class-2", ALIGN_CENTER);
-    table_cell(fp, "Row 2, Column 3", "cell-class-3", ALIGN_RIGHT);
-    table_row_end(fp);
+    table_header(fp, columns, sizeof(columns) / sizeof(columns[0]));
 
     table_end(fp);
+    div_end(fp);
     div_end(fp);
 
     html_document_end(fp);
