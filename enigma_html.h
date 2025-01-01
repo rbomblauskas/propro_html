@@ -53,7 +53,7 @@ void html_document_begin(FILE *fp, const char *title, const char *css_file);
 void html_document_end(FILE *fp);
 
 // Generates the navigation bar
-void navbar_generate(FILE *fp, const NavbarConfig *config);
+void navbar_gen(FILE *fp, const NavbarConfig *config);
 
 // Begin a new div with optional CSS class
 void div_begin(FILE *fp, const char *css_class, const char *id);

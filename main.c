@@ -24,7 +24,7 @@ int main()
         .items = items,
         .num_items = 3};
 
-    navbar_generate(fp, &navbar);
+    navbar_gen(fp, &navbar);
 
     div_begin(fp, "leaderboard-container", NULL);
     h1_gen(fp, "Top Players", "leaderboard-title");

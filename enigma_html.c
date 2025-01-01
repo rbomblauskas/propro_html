@@ -27,7 +27,7 @@ void html_document_end(FILE *fp)
     fprintf(fp, "</body>\n</html>\n");
 }
 
-void navbar_generate(FILE *fp, const NavbarConfig *config)
+void navbar_gen(FILE *fp, const NavbarConfig *config)
 {
     if (!fp || !config)
         return;
