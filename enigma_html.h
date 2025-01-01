@@ -41,7 +41,7 @@ void div_begin(FILE *fp, const char *css_class, const char *id);
 // End the current div
 void div_end(FILE *fp);
 
-// Generates the h1 header.
+// Generates an h1 header.
 void h1_gen(FILE *fp, const char *title, const char *css_class);
 
 // Initialize a new table with given configuration

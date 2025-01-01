@@ -1,5 +1,3 @@
-
-
 #include "enigma_html.h"
 #include <stdlib.h>
 #include <string.h>
