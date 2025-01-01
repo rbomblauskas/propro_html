@@ -197,6 +197,37 @@ void table_end(FILE *fp)
     fprintf(fp, "  </tbody>\n</table>\n</div>\n");
 }
 
+void list_begin(FILE *fp, const char *css_class)
+{
+    if (!fp)
+        return;
+    fprintf(fp, "<ul");
+    if (css_class)
+    {
+        fprintf(fp, " class=\"%s\"", css_class);
+    }
+    fprintf(fp, ">\n");
+}
+
+void list_item(FILE *fp, const char *content, const char *css_class)
+{
+    if (!fp)
+        return;
+    fprintf(fp, "  <li");
+    if (css_class)
+    {
+        fprintf(fp, " class=\"%s\"", css_class);
+    }
+    fprintf(fp, ">%s</li>\n", content);
+}
+
+void list_end(FILE *fp)
+{
+    if (!fp)
+        return;
+    fprintf(fp, "</ul>\n");
+}
+
 char *html_escape(const char *input)
 {
     if (!input)
