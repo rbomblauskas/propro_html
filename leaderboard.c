@@ -22,6 +22,7 @@ int main(void) {
     // Start leaderboard container
     div_begin(fp, "leaderboard-container", NULL);
     h1_gen(fp, "Top Players", "leaderboard-title");
+    div_begin(fp, "leaderboard-table-container", NULL);
 
     // Initialize table columns and config
     TableColumn columns[] = {
@@ -44,13 +45,14 @@ int main(void) {
     table_cell(fp, "192.168.1.1", NULL, ALIGN_LEFT);
     table_cell(fp, "00:45", NULL, ALIGN_LEFT);
     table_cell(fp, "10", NULL, ALIGN_LEFT);
-    table_cell(fp, "90%", NULL, ALIGN_LEFT);
+    table_cell(fp, "90%%", NULL, ALIGN_LEFT);
     table_cell(fp, "2025-01-02", NULL, ALIGN_LEFT);
     table_row_end(fp);
 
     table_end(fp);
 
     // End leaderboard container
+    div_end(fp);
     div_end(fp);
     html_document_end(fp);
 
