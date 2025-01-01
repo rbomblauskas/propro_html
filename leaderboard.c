@@ -13,8 +13,8 @@ int main(void) {
 
     // Initialize navbar items and config
     NavbarItem navbarItems[] = {
-        {"Play", "/", NULL},
-        {"Leaderboard", "/leaderboard.html", NULL}
+        {"/", "Play", NULL},
+        {"/leaderboard.html", "Leaderboard", NULL}
     };
     NavbarConfig navbarConfig = {"navbar", "navbar", "Minesweeper", "navbar-logo", navbarItems, 2};
     navbar_gen(fp, &navbarConfig);
@@ -45,7 +45,7 @@ int main(void) {
     table_cell(fp, "192.168.1.1", NULL, ALIGN_LEFT);
     table_cell(fp, "00:45", NULL, ALIGN_LEFT);
     table_cell(fp, "10", NULL, ALIGN_LEFT);
-    table_cell(fp, "90%%", NULL, ALIGN_LEFT);
+    table_cell(fp, "90%", NULL, ALIGN_LEFT);
     table_cell(fp, "2025-01-02", NULL, ALIGN_LEFT);
     table_row_end(fp);
 
